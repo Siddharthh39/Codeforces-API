@@ -1,0 +1,3 @@
+CODEFORCES_API_BASE = "https://codeforces.com/api"
+CACHE_TTL_SECONDS = 300
+HTTP_TIMEOUT_SECONDS = 15.0
