@@ -7,4 +7,6 @@ backend/app/services/__pycache__/
 backend/app/utils/__pycache__/
 backend/app/dependencies/__pycache__/
 backend/app/api/routes/__pycache__/
+backend/app/db/__pycache__/
+.env
 myenv

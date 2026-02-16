@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Codeforces Contest Alerts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <style>
+    :root {
+      --bg: #050910;
+      --panel: #0b1220;
+      --panel-border: #1f2937;
+      --text: #e6edf3;
+      --muted: #8ca0b8;
+      --accent: #7c3aed;
+      --accent-2: #14b8a6;
+      --accent-soft: rgba(124, 58, 237, 0.12);
+      --shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    }
+    body { font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); }
+    .navbar { background: rgba(5,9,16,0.9); border-bottom: 1px solid var(--panel-border); backdrop-filter: blur(10px); }
+    .hero { padding: 4rem 0; background: radial-gradient(circle at 20% 20%, rgba(124,58,237,0.2), transparent 40%),
+             radial-gradient(circle at 80% 0%, rgba(20,184,166,0.18), transparent 35%),
+             linear-gradient(135deg, #050910 0%, #0a1224 100%); }
+    .card { background: var(--panel); border: 1px solid var(--panel-border); box-shadow: var(--shadow); }
+    .card-header { background: #070d18; border-bottom: 1px solid var(--panel-border); }
+    .badge-soft { background: var(--accent-soft); color: #d8c4ff; }
+    .btn-primary { background: linear-gradient(120deg, var(--accent), var(--accent-2)); border: none; box-shadow: 0 8px 25px rgba(124,58,237,0.35); }
+    .btn-primary:hover { transform: translateY(-1px); opacity: 0.95; }
+    a, .nav-link { color: #c7d2fe; }
+    a:hover, .nav-link:hover { color: #a5b4fc; }
+    .section-title { font-weight: 600; letter-spacing: 0.5px; }
+    .text-faded { color: var(--muted); }
+    .contest-card { transition: transform 0.15s ease, border-color 0.2s ease; }
+    .contest-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+    .glass { background: rgba(11,18,32,0.65); border: 1px solid var(--panel-border); backdrop-filter: blur(12px); }
+    .pill { border-radius: 999px; padding: 0.4rem 0.85rem; background: var(--accent-soft); color: #d8c4ff; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand text-white fw-semibold" href="#" data-section="home">Codeforces Alert</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" data-section="home" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" data-section="profile" href="#">Profile</a></li>
+          <li class="nav-item"><a class="nav-link" data-section="contests" href="#">Contests</a></li>
+          <li class="nav-item"><a class="nav-link" data-section="reminders" href="#">Reminders</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero section-view" id="section-home">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <p class="text-faded mb-2">Built by Siddharth Singh</p>
+          <h1 class="display-5 fw-bold mb-3">Stay ahead of Codeforces contests.</h1>
+          <p class="lead text-faded mb-4">Pick your contests, set your email and reminders, and get timely notifications before the clock runs out.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a class="btn btn-primary" data-section="profile" href="#">Set up profile</a>
+            <a class="btn btn-outline-light" data-section="contests" href="#">Browse contests</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card shadow-sm">
+            <div class="card-header">How it works</div>
+            <div class="card-body">
+              <ol class="text-faded mb-0">
+                <li>Create your profile with email & timezone.</li>
+                <li>Select upcoming contests to watch.</li>
+                <li>Preview reminder times and dispatch notifications.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="section-profile" class="py-5 section-view" hidden>
+    <div class="container">
+      <h2 class="section-title mb-3">Profile & Preferences</h2>
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <form id="user-form" class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" placeholder="you@example.com" required />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Timezone (IANA)</label>
+              <input list="tz-options" type="text" class="form-control" name="timezone" value="UTC" placeholder="Start typing e.g. Asia/Kolkata" />
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Reminders</label>
+              <input type="number" class="form-control" name="reminder_count" value="3" min="1" max="10" />
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Start (min before)</label>
+              <input type="number" class="form-control" name="reminder_start_minutes" value="30" min="0" max="240" />
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Interval (min)</label>
+              <input type="number" class="form-control" name="reminder_interval_minutes" value="10" min="1" max="120" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Codeforces handle</label>
+              <input type="text" class="form-control" name="cf_handle" placeholder="optional" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Codeforces API key</label>
+              <input type="text" class="form-control" name="cf_api_key" placeholder="optional" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Codeforces API secret</label>
+              <input type="password" class="form-control" name="cf_api_secret" placeholder="optional" />
+            </div>
+            <div class="col-12 d-flex gap-2">
+              <button class="btn btn-primary" type="submit">Save profile</button>
+              <button class="btn btn-outline-light" type="button" id="load-profile">Load existing</button>
+              <div id="user-status" class="text-faded ms-2"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+  </section>
+
+  <section id="section-contests" class="py-5 section-view" hidden>
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <p class="text-faded mb-1">Step 2</p>
+          <h3 class="section-title mb-0">Choose contests to watch</h3>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <input list="tz-options" type="text" class="form-control w-auto" id="contest-timezone" placeholder="Timezone (optional)" />
+          <button class="btn btn-outline-light" id="refresh-contests" type="button">Refresh</button>
+        </div>
+      </div>
+      <div id="contest-status" class="text-faded mb-3"></div>
+      <div id="contests-list" class="row g-3"></div>
+      <div class="mt-4 d-flex gap-2">
+        <button class="btn btn-primary" id="save-subscriptions" type="button">Save selections</button>
+        <div id="save-status" class="text-faded"></div>
+      </div>
+    </div>
+    </div>
+
+  <section id="section-reminders" class="py-5 section-view" hidden>
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <p class="text-faded mb-1">Step 3</p>
+          <h3 class="section-title mb-0">Reminder preview & dispatch</h3>
+        </div>
+        <button class="btn btn-outline-light" id="dispatch" type="button">Dispatch due notifications</button>
+      </div>
+      <div id="dispatch-status" class="text-faded mb-3"></div>
+      <div class="card shadow-sm mb-3">
+        <div class="card-body" id="preview-list" class="text-faded">No previews yet.</div>
+      </div>
+    </div>
+  </section>
+
+  <datalist id="tz-options"></datalist>
+  </section>
+
+  <footer class="py-4 border-top border-secondary mt-5">
+    <div class="container text-center text-faded">
+      Crafted for Codeforces enthusiasts. Stay sharp, stay on time.
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
