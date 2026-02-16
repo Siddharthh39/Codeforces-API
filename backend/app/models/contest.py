@@ -11,6 +11,9 @@ class Contest(BaseModel):
     start_time_utc: datetime | None
     duration_seconds: int | None
     relative_time_seconds: int | None
+    start_time_local: datetime | None = None
+    local_timezone: str | None = None
+    start_time_local_formatted: str | None = None
 
 
 class AuthParams(BaseModel):
