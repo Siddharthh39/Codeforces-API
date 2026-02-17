@@ -1,0 +1,13 @@
+myenv/
+.git
+.gitignore
+.env.local
+__pycache__
+*.pyc
+.pytest_cache
+.vscode
+*.egg-info
+.DS_Store
+frontend/
+*.md
+node_modules

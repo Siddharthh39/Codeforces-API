@@ -20,5 +20,5 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "")
 DB_NAME = os.getenv("DB_NAME", "codeforces")
 
 # AWS SES configuration for email notifications
-AWS_SES_REGION = os.getenv("AWS_SES_REGION", "us-east-1")
+AWS_SES_REGION = os.getenv("AWS_SES_REGION", "ap-south-1")
 AWS_SES_SENDER = os.getenv("AWS_SES_SENDER", "")
